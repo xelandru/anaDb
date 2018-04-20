@@ -1,0 +1,6 @@
+This is a template_A
+Dear Mr {CandidateName},
+We're glad that you applied for {job}
+
+Thanks,
+{recruiterName}
