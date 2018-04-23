@@ -3,18 +3,31 @@ package templates;
 
 import domain.Candidate;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TemplateA  {
+public class TemplateA extends Template {
 
-    private Set<String> toRena = new HashSet<>();
 
+    TemplateA(Candidate candidate) {
+        super(candidate);
+    }
+
+    @Override
+    public String getCustomMessage() {
+
+        StringBuilder text = new StringBuilder(getTemplateText());
+
+        Map<String, String> toReplace = new HashMap<>();
+
+        toReplace.put("{name}", candidate.getName());
+        toReplace.put("{jobLink}", candidate.getJobLink());
+
+        for (String key : toReplace.keySet())
+            replace(text, key, toReplace.get(key));
+
+        return text.toString();
+    }
 
 }
 

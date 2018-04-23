@@ -3,30 +3,35 @@ package templates;
 
 import domain.Candidate;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class Template {
 
     Candidate candidate;
-    final String TEMPLATE_FOLDER = "templates";
+    private final String templateFolder = "/home/adascalu/Desktop/ana/src/main/resources/templates/";
 
     Template(Candidate candidate) {
-
+        this.candidate = candidate;
     }
 
-    public abstract String processTemplate();
+    String getTemplateText() {
 
-    String  getTemplateContent() throws IOException {
-
-        Path path = Paths.get(TEMPLATE_FOLDER, candidate.getTemplate());
-        return new String(Files.readAllBytes(path));
+        String text;
+        try {
+            text = new String(Files.readAllBytes(Paths.get(templateFolder + candidate.getTemplateName())));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not find template for candidate " + candidate.getName());
+        }
+        return text;
     }
+
+    public abstract String getCustomMessage();
+
+    void replace(StringBuilder builder, String from, String to) {
+        int index = builder.indexOf(from);
+        builder.replace(index, index + from.length(), to);
+    }
+
 }
