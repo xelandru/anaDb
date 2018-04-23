@@ -3,37 +3,35 @@ package domain;
 
 public class Candidate {
 
-    String name;
-    String email;
-    String template;
+    private String name;
+    private String email;
+    private String templateName;
+
+    public String getJobLink() {
+        return jobLink;
+    }
+
+    private String jobLink;
+
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+
+    public String getTemplateName() {
+        return templateName;
     }
 
-    public String getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
-    }
-
-    public Candidate(String name, String email, String template) {
+    public Candidate(String name, String email, String templateName, String jobLink) {
         this.name = name;
         this.email = email;
-        this.template = template;
+        this.templateName = templateName;
+        this.jobLink = jobLink;
     }
 }
