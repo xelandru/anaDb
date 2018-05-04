@@ -15,18 +15,9 @@ public class TemplateA extends Template {
 
     @Override
     public String getCustomMessage() {
+        //TODO
 
-        StringBuilder text = new StringBuilder(getTemplateText());
-
-        Map<String, String> toReplace = new HashMap<>();
-
-        toReplace.put("{name}", candidate.getName());
-        toReplace.put("{jobLink}", candidate.getJobLink());
-
-        for (String key : toReplace.keySet())
-            replace(text, key, toReplace.get(key));
-
-        return text.toString();
+        return null;
     }
 
 }

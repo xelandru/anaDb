@@ -18,13 +18,8 @@ public abstract class Template {
 
     String getTemplateText() {
 
-        String text;
-        try {
-            text = new String(Files.readAllBytes(Paths.get(templateFolder + candidate.getTemplateName())));
-        } catch (IOException e) {
-            throw new RuntimeException("Could not find template for candidate " + candidate.getName());
-        }
-        return text;
+        //TODO
+        return null;
     }
 
     public abstract String getCustomMessage();
