@@ -1,20 +1,22 @@
 package db;
 
 
-
 import configuration.CandidateProperties;
 import domain.Candidate;
 import exceptions.DAOException;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOImpl implements CandidateDAO {
+public class DAODerbyImpl implements CandidateDAO {
 
     private CandidateProperties properties;
 
-    public DAOImpl() {
+    public DAODerbyImpl() {
 
         properties = new CandidateProperties();
     }
