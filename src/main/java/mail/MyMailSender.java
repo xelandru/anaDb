@@ -7,10 +7,7 @@ import domain.Candidate;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Properties;
 
 public class MyMailSender {
 
@@ -33,7 +30,7 @@ public class MyMailSender {
             message.setFrom(sender);
 
             for (Candidate candidate : candidates) {
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(candidate.getEmail()));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(candidate.getMailAddress()));
                 message.setSubject("Mail test");
                 message.setText("HI");
                 Transport.send(message);

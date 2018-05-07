@@ -11,6 +11,4 @@ public interface CandidateDAO {
     void deleteCandidate(Candidate candidate);
     void updateCandidate(Candidate candidate);
     List<Candidate> readAllCandidates();
-    InputStream getCV(Candidate candidate);
-
 }

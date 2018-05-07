@@ -6,7 +6,6 @@ import configuration.CandidateProperties;
 import domain.Candidate;
 import exceptions.DAOException;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +20,15 @@ public class DAOImpl implements CandidateDAO {
     }
 
     private static final String createCandidate =
-            "INSERT INTO candidates(id, firstName, lastName, eMail, phoneNumber, hireDate, linkedIn, cv) " +
+            "INSERT INTO candidates(id, name, job, mail, phone, link, info) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String deleteCandidate = "DELETE FROM candidates WHERE id = ?";
 
-    private static final String updateCandidate = "UPDATE candidates SET firstName = ?, lastName = ?, eMail = ?, " +
-            "phoneNumber = ?, hireDate = ?, linkedIn = ?, cv = ? WHERE id = ?";
+    private static final String updateCandidate = "UPDATE candidates SET name = ?, job = ?, mail = ?, " +
+            "phone = ?, link = ?, info = ? WHERE id = ?";
 
     private static final String getAllCandidates = "SELECT * from candidates ORDER BY id";
-
-    private static final String getCV = "SELECT cv from candidates WHERE id = ?";
 
 
     public void createCandidate(Candidate candidate) {
@@ -41,13 +38,12 @@ public class DAOImpl implements CandidateDAO {
 
         Object[] values = {
                 candidate.getId(),
-                candidate.getFirstName(),
-                candidate.getLastName(),
-                candidate.getEmail(),
-                candidate.getPhoneNumber(),
-                candidate.getHireDate(),
-                candidate.getLinkedIn(),
-                candidate.getCv()
+                candidate.getName(),
+                candidate.getJob(),
+                candidate.getMailAddress(),
+                candidate.getPhone(),
+                candidate.getLink(),
+                candidate.getInfo()
         };
 
         Connection connection = DbUtil.openConnection(properties);
@@ -90,14 +86,13 @@ public class DAOImpl implements CandidateDAO {
             throw new IllegalArgumentException("User is not created yet, the user ID is null.");
 
         Object[] values = {
-                candidate.getFirstName(),
-                candidate.getLastName(),
-                candidate.getEmail(),
-                candidate.getPhoneNumber(),
-                candidate.getHireDate(),
-                candidate.getLinkedIn(),
-                candidate.getCv(),
-                candidate.getId()
+                candidate.getId(),
+                candidate.getName(),
+                candidate.getMailAddress(),
+                candidate.getPhone(),
+                candidate.getLink(),
+                candidate.getJob(),
+                candidate.getInfo()
         };
 
         Connection connection = DbUtil.openConnection(properties);
@@ -107,7 +102,6 @@ public class DAOImpl implements CandidateDAO {
             throw new DAOException("Updating user failed, no rows affected.");
 
         DbUtil.closeConnection(connection);
-
 
     }
 
@@ -133,47 +127,17 @@ public class DAOImpl implements CandidateDAO {
 
     }
 
-    public InputStream getCV(Candidate candidate) {
-
-        if (candidate.getId() == null)
-            throw new IllegalArgumentException("User does not have an ID");
-
-        Object[] values = {
-                candidate.getId()
-        };
-
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, getCV, values);
-        ResultSet resultSet = DbUtil.updateQuery(statement);
-        InputStream binaryStream = null;
-        Blob blob= null;
-
-        try {
-            if(resultSet.next())
-                 blob = resultSet.getBlob("cv");
-            if (blob != null) {
-                binaryStream = blob.getBinaryStream();
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-
-        DbUtil.closeConnection(connection);
-        return binaryStream;
-    }
-
     private static Candidate map(ResultSet resultSet) {
         Candidate candidate = new Candidate();
 
         try {
             candidate.setId(resultSet.getInt("id"));
-            candidate.setFirstName(resultSet.getString("firstname"));
-            candidate.setLastName(resultSet.getString("lastname"));
-            candidate.setEmail(resultSet.getString("email"));
-            candidate.setPhoneNumber(resultSet.getString("phoneNumber"));
-            candidate.setHireDate(resultSet.getDate("hireDate"));
-            candidate.setLinkedIn(resultSet.getString("linkedIn"));
-//        candidate.setCv(new FileInputStream(resultSet.get("cv")));
+            candidate.setName(resultSet.getString("name"));
+            candidate.setMailAddress(resultSet.getString("mail"));
+            candidate.setPhone(resultSet.getString("phone"));
+            candidate.setLink(resultSet.getString("link"));
+            candidate.setJob(resultSet.getString("job"));
+            candidate.setInfo(resultSet.getString("info"));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -3,9 +3,10 @@ package domain;
 
 public class Candidate {
 
+    private Integer id;
     private String name;
     private String job;
-    private String email;
+    private String mailAddress;
     private String phone;
     private String info;
     private String link;
@@ -15,15 +16,6 @@ public class Candidate {
     }
 
     public void setLink(String link) {
-        this.link = link;
-    }
-
-    public Candidate(String name, String job, String email, String phone, String info, String link) {
-        this.name = name;
-        this.job = job;
-        this.email = email;
-        this.phone = phone;
-        this.info = info;
         this.link = link;
     }
 
@@ -51,12 +43,12 @@ public class Candidate {
         this.job = job;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     public String getPhone() {
@@ -65,5 +57,26 @@ public class Candidate {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return (object instanceof Candidate) &&
+                (id != null) ? id.equals(((Candidate) object).id) : this == object;
+    }
+
+    @Override
+    public int hashCode() {
+        return (id != null)
+                ? (this.getClass().hashCode() + id.hashCode())
+                : super.hashCode();
     }
 }

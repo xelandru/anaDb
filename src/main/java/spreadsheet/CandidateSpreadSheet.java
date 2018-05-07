@@ -48,7 +48,7 @@ public class CandidateSpreadSheet {
                 Row row = sheet.createRow(rowNumber++);
                 row.createCell(Columns.NAME.ordinal()).setCellValue(candidate.getName());
                 row.createCell(Columns.JOB.ordinal()).setCellValue(candidate.getJob());
-                row.createCell(Columns.EMAIL.ordinal()).setCellValue(candidate.getEmail());
+                row.createCell(Columns.EMAIL.ordinal()).setCellValue(candidate.getMailAddress());
                 row.createCell(Columns.PHONE.ordinal()).setCellValue(candidate.getPhone());
                 row.createCell(Columns.LINK.ordinal()).setCellValue(candidate.getLink());
                 row.getCell(Columns.LINK.ordinal()).setHyperlink(link);
