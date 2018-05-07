@@ -24,7 +24,7 @@ public class CandidateProperties  extends Properties{
     public CandidateProperties() {
         super();
 
-        InputStream propertiesFile = getClass().getResourceAsStream(PROPERTIES_FILE);
+        InputStream propertiesFile = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE);
 
         if (propertiesFile == null) {
             throw new ConfigurationException(
@@ -71,6 +71,10 @@ public class CandidateProperties  extends Properties{
 
     public String getMailSenderAddress() {
         return getProperty(MAIL_SENDER_ADDRESS);
+    }
+
+    public static void main(String[] args) {
+        new CandidateProperties();
     }
 }
 
