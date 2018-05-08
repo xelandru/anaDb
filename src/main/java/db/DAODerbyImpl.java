@@ -48,9 +48,9 @@ public class DAODerbyImpl implements CandidateDAO {
                 candidate.getInfo()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, createCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = DerbyUtil.openConnection(properties);
+        PreparedStatement statement = DerbyUtil.prepareStatement(connection, true, createCandidate, values);
+        int affectedRows = DerbyUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Creating user failed, no rows affected.");
 
@@ -63,7 +63,7 @@ public class DAODerbyImpl implements CandidateDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-        DbUtil.closeConnection(connection);
+        DerbyUtil.closeConnection(connection);
     }
 
     public void deleteCandidate(Candidate candidate) {
@@ -72,15 +72,15 @@ public class DAODerbyImpl implements CandidateDAO {
                 candidate.getId()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, false, deleteCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = DerbyUtil.openConnection(properties);
+        PreparedStatement statement = DerbyUtil.prepareStatement(connection, false, deleteCandidate, values);
+        int affectedRows = DerbyUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Deleting user failed, no rows affected");
         else
             candidate.setId(null);
 
-        DbUtil.closeConnection(connection);
+        DerbyUtil.closeConnection(connection);
     }
 
     public void updateCandidate(Candidate candidate) {
@@ -97,13 +97,13 @@ public class DAODerbyImpl implements CandidateDAO {
                 candidate.getInfo()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, updateCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = DerbyUtil.openConnection(properties);
+        PreparedStatement statement = DerbyUtil.prepareStatement(connection, true, updateCandidate, values);
+        int affectedRows = DerbyUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Updating user failed, no rows affected.");
 
-        DbUtil.closeConnection(connection);
+        DerbyUtil.closeConnection(connection);
 
     }
 
@@ -111,9 +111,9 @@ public class DAODerbyImpl implements CandidateDAO {
 
         List<Candidate> candidates = new ArrayList<>();
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, getAllCandidates);
-        ResultSet resultSet = DbUtil.updateQuery(statement);
+        Connection connection = DerbyUtil.openConnection(properties);
+        PreparedStatement statement = DerbyUtil.prepareStatement(connection, true, getAllCandidates);
+        ResultSet resultSet = DerbyUtil.updateQuery(statement);
 
         try {
             while (resultSet.next()) {
@@ -123,7 +123,7 @@ public class DAODerbyImpl implements CandidateDAO {
             throw new DAOException(e);
         }
 
-        DbUtil.closeConnection(connection);
+        DerbyUtil.closeConnection(connection);
 
         return candidates;
 

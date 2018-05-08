@@ -11,10 +11,15 @@ public class CandidateProperties  extends Properties{
 
     private static final String PROPERTIES_FILE = "configuration.properties";
 
-    private static final String DB_USERNAME = "db.username";
-    private static final String DB_PASSWORD = "db.password";
-    private static final String DB_URL = "db.url";
-    private static final String DB_DRIVER = "db.driver";
+    private static final String DERBY_USERNAME = "db.username";
+    private static final String DERBY_PASSWORD = "db.password";
+    private static final String DERBY_URL = "db.url";
+    private static final String DERBY_DRIVER = "db.driver";
+
+    private static final String MYSQL_USERNAME = "db.username";
+    private static final String MYSQL_PASSWORD = "db.password";
+    private static final String MYSQL_URL = "db.url";
+    private static final String MYSQL_DRIVER = "db.driver";
 
     private static final String MAIL_USERNAME = "mail.username";
     private static final String MAIL_PASSWORD = "mail.password";
@@ -40,24 +45,44 @@ public class CandidateProperties  extends Properties{
         }
     }
 
-    public String getDBUserName() {
+    public String getDerbyUsername() {
 
-        return getProperty(DB_USERNAME);
+        return getProperty(DERBY_USERNAME);
     }
 
-    public String getDBPassword() {
+    public String getDerbyPassword() {
 
-        return getProperty(DB_PASSWORD);
+        return getProperty(DERBY_PASSWORD);
     }
 
-    public String getDBUrl() {
+    public String getDerbyUrl() {
 
-        return getProperty(DB_URL);
+        return getProperty(DERBY_URL);
     }
 
-    public String getDBDriver() {
+    public String getDerbyDriver() {
 
-        return getProperty(DB_DRIVER);
+        return getProperty(DERBY_DRIVER);
+    }
+
+    public String getMysqlUsername() {
+
+        return getProperty(MYSQL_USERNAME);
+    }
+
+    public String getMysqlPassword() {
+
+        return getProperty(MYSQL_PASSWORD);
+    }
+
+    public String getMysqlUrl() {
+
+        return getProperty(MYSQL_URL);
+    }
+
+    public String getMysqlDriver() {
+
+        return getProperty(MYSQL_DRIVER);
     }
 
 

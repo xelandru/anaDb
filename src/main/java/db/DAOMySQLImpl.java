@@ -46,9 +46,9 @@ public class DAOMySQLImpl implements CandidateDAO {
                 candidate.getInfo()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, createCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = MySqlUtil.openConnection(properties);
+        PreparedStatement statement = MySqlUtil.prepareStatement(connection, true, createCandidate, values);
+        int affectedRows = MySqlUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Creating user failed, no rows affected.");
 
@@ -61,7 +61,7 @@ public class DAOMySQLImpl implements CandidateDAO {
         } catch (SQLException e) {
             throw new DAOException(e);
         }
-        DbUtil.closeConnection(connection);
+        MySqlUtil.closeConnection(connection);
     }
 
     public void deleteCandidate(Candidate candidate) {
@@ -70,15 +70,15 @@ public class DAOMySQLImpl implements CandidateDAO {
                 candidate.getId()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, false, deleteCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = MySqlUtil.openConnection(properties);
+        PreparedStatement statement = MySqlUtil.prepareStatement(connection, false, deleteCandidate, values);
+        int affectedRows = MySqlUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Deleting user failed, no rows affected");
         else
             candidate.setId(null);
 
-        DbUtil.closeConnection(connection);
+        MySqlUtil.closeConnection(connection);
     }
 
     public void updateCandidate(Candidate candidate) {
@@ -95,13 +95,13 @@ public class DAOMySQLImpl implements CandidateDAO {
                 candidate.getInfo()
         };
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, updateCandidate, values);
-        int affectedRows = DbUtil.executeQuery(statement);
+        Connection connection = MySqlUtil.openConnection(properties);
+        PreparedStatement statement = MySqlUtil.prepareStatement(connection, true, updateCandidate, values);
+        int affectedRows = MySqlUtil.executeQuery(statement);
         if (affectedRows == 0)
             throw new DAOException("Updating user failed, no rows affected.");
 
-        DbUtil.closeConnection(connection);
+        MySqlUtil.closeConnection(connection);
 
     }
 
@@ -109,9 +109,9 @@ public class DAOMySQLImpl implements CandidateDAO {
 
         List<Candidate> candidates = new ArrayList<>();
 
-        Connection connection = DbUtil.openConnection(properties);
-        PreparedStatement statement = DbUtil.prepareStatement(connection, true, getAllCandidates);
-        ResultSet resultSet = DbUtil.updateQuery(statement);
+        Connection connection = MySqlUtil.openConnection(properties);
+        PreparedStatement statement = MySqlUtil.prepareStatement(connection, true, getAllCandidates);
+        ResultSet resultSet = MySqlUtil.updateQuery(statement);
 
         try {
             while (resultSet.next()) {
@@ -121,7 +121,7 @@ public class DAOMySQLImpl implements CandidateDAO {
             throw new DAOException(e);
         }
 
-        DbUtil.closeConnection(connection);
+        MySqlUtil.closeConnection(connection);
 
         return candidates;
 

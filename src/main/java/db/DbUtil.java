@@ -1,33 +1,11 @@
 package db;
 
 
-import configuration.CandidateProperties;
 
 import java.sql.*;
 
-final class DbUtil {
+public abstract class DbUtil {
 
-    private DbUtil() {
-    }
-
-    static Connection openConnection(CandidateProperties properties) {
-
-        Connection connection = null;
-
-        try {
-            Class.forName(properties.getDBDriver());
-            try {
-                connection = DriverManager.getConnection(properties.getDBUrl(),
-                        properties.getDBUserName(), properties.getDBPassword());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return connection;
-    }
 
     static void closeConnection(Connection connection) {
         if (connection != null)
