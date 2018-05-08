@@ -2,4 +2,4 @@
 
 docker build -t my_sql .
 sleep 1
-docker run --name=my_sql -p 3306:3306 my_sql
+docker run --name=my_sql -d -p 3306:3306 my_sql

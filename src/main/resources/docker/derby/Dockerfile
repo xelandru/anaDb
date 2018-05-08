@@ -36,8 +36,8 @@ RUN wget https://dist.apache.org/repos/dist/release/db/derby/db-derby-$DERBY_VER
 
 WORKDIR $DERBY_HOME
 
-
-COPY create_db.sql $DERBY_HOME/create_db.sql
-RUN java org.apache.derby.tools.ij create_db.sql
+ENV SCRIPT=init.sql
+COPY $SCRIPT $DERBY_HOME/
+RUN java org.apache.derby.tools.ij $SCRIPT
 EXPOSE 1527
 CMD ["java", "-Dderby.stream.error.field=java.lang.System.out", "org.apache.derby.drda.NetworkServerControl", "start", "-h", "0.0.0.0"]
