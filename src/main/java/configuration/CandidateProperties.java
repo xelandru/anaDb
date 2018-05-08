@@ -11,15 +11,15 @@ public class CandidateProperties  extends Properties{
 
     private static final String PROPERTIES_FILE = "configuration.properties";
 
-    private static final String DERBY_USERNAME = "db.username";
-    private static final String DERBY_PASSWORD = "db.password";
-    private static final String DERBY_URL = "db.url";
-    private static final String DERBY_DRIVER = "db.driver";
+    private static final String DERBY_USERNAME = "derby.username";
+    private static final String DERBY_PASSWORD = "derby.password";
+    private static final String DERBY_URL = "derby.url";
+    private static final String DERBY_DRIVER = "derby.driver";
 
-    private static final String MYSQL_USERNAME = "db.username";
-    private static final String MYSQL_PASSWORD = "db.password";
-    private static final String MYSQL_URL = "db.url";
-    private static final String MYSQL_DRIVER = "db.driver";
+    private static final String MYSQL_USERNAME = "mysql.username";
+    private static final String MYSQL_PASSWORD = "mysql.password";
+    private static final String MYSQL_URL = "mysql.url";
+    private static final String MYSQL_DRIVER = "mysql.driver";
 
     private static final String MAIL_USERNAME = "mail.username";
     private static final String MAIL_PASSWORD = "mail.password";
